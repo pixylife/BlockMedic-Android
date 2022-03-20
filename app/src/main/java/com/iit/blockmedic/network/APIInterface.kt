@@ -12,7 +12,7 @@ import retrofit2.http.POST
 
 interface APIInterface {
 
-    @POST("api/login")
+    @POST("api/user/authenticate")
     fun login(@Header("Authorization") authorization: String, @Body loginRequest: LoginRequest): Call<User>
 
     @GET("api/doctors")

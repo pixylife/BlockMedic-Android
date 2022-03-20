@@ -10,11 +10,41 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.BlockMedic">
         <activity
-            android:name=".ui.dashboard.DashboardActivity"
+            android:name=".ui.doctor.ViewDoctorsActivity"
             android:exported="false" />
         <activity
-            android:name=".ui.user.LoginActivity"
+            android:name=".ui.doctor.DoctorRegisterActivity"
             android:exported="false" />
+        <activity
+            android:name=".ui.dashboard.DashboardHospitalActivity"
+            android:exported="false"
+            android:screenOrientation="fullSensor"
+            android:theme="@style/NoActionBar" />
+        <activity
+            android:name=".ui.dashboard.DashboardDoctorActivity"
+            android:exported="false"
+            android:screenOrientation="fullSensor"
+            android:theme="@style/NoActionBar" />
+        <activity
+            android:name=".ui.user.SignUpActivity"
+            android:exported="false"
+            android:screenOrientation="fullSensor"
+            android:theme="@style/NoActionBar" />
+        <activity
+            android:name=".ui.dashboard.DashboardActivity"
+            android:exported="false"
+            android:theme="@style/NoActionBar" />
+        <activity
+            android:name=".ui.user.LoginActivity"
+            android:exported="true"
+            android:screenOrientation="fullSensor"
+            android:theme="@style/NoActionBar">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
         <activity
             android:name=".ui.MainActivity"
             android:exported="true" />

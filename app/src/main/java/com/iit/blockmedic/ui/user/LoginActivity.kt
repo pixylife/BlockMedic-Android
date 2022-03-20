@@ -1,23 +1,20 @@
 package com.iit.blockmedic.ui.user
 
 import android.content.Intent
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.text.TextUtils
 import android.util.Base64
 import android.util.Patterns
 import android.widget.Toast
+import androidx.appcompat.app.AppCompatActivity
 import com.iit.blockmedic.R
-import com.iit.blockmedic.app.BlockMedicApplication
 import com.iit.blockmedic.model.LoginRequest
-import com.iit.blockmedic.model.User
 import com.iit.blockmedic.network.APIInterface
 import com.iit.blockmedic.ui.dashboard.DashboardActivity
-import com.iit.blockmedic.util.SharedPreferencesHandler
+import com.iit.blockmedic.ui.dashboard.DashboardDoctorActivity
+import com.iit.blockmedic.ui.dashboard.DashboardHospitalActivity
 import kotlinx.android.synthetic.main.activity_login.*
-import retrofit2.Call
-import retrofit2.Callback
-import retrofit2.Response
+import kotlinx.android.synthetic.main.activity_sign_up.*
 import javax.inject.Inject
 
 class LoginActivity : AppCompatActivity() {
@@ -27,10 +24,10 @@ class LoginActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_login)
-        (application as BlockMedicApplication).getAppComponent()?.inject(this@LoginActivity)
+       // (application as BlockMedicApplication).getAppComponent()?.inject(this@LoginActivity)
 
         btnLogin.setOnClickListener {
-            val email = edtLoginEmail.text.toString()
+            /*val email = edtLoginEmail.text.toString()
             val password = edtLoginPassword.text.toString()
             //field validation
             if (isValidate(email, password)) {
@@ -38,13 +35,19 @@ class LoginActivity : AppCompatActivity() {
                 login(email, password)
             } else {
                 showError(getMessage(email, password))
-            }
+            }*/
+            val intent = Intent(this@LoginActivity, DashboardHospitalActivity::class.java)
+            startActivity(intent)
         }
 
         btnLoginRegister.setOnClickListener {
-            /*val intent = Intent(this@LoginActivity, SignUpActivity::class.java)
-            startActivity(intent)//start new activity*/
+            val intent = Intent(this@LoginActivity, SignUpActivity::class.java)
+            startActivity(intent)
         }
+     /*   btnLoginRegister.setOnClickListener {
+            *//*val intent = Intent(this@LoginActivity, SignUpActivity::class.java)
+            startActivity(intent)//start new activity*//*
+        }*/
     }
 
 
@@ -105,33 +108,34 @@ class LoginActivity : AppCompatActivity() {
         Toast.makeText(this, "Something went wrong", Toast.LENGTH_LONG).show()
     }
         //Toasty.error(this, error, Toast.LENGTH_LONG, true).show()//show error toast message
+        private fun login(email: String, password: String) {
+            val credentials = "blockmedic:blockmedic@123"
+            val basic = "Basic " + Base64.encodeToString(
+                credentials.toByteArray(),
+                Base64.NO_WRAP
+            )
+            var request = LoginRequest(email, password)
+
+            /*  apiInterface!!.login(basic, request).enqueue(object : Callback<User> {
+                  override fun onResponse(call: Call<User>, response: Response<User>) {
+                      if (response.code() == 200) {
+                          val token: String? = response.body()?.token
+                          SharedPreferencesHandler().saveIntoSharedPreferences(applicationContext, token)
+                          val intent = Intent(this@LoginActivity, DashboardActivity::class.java)
+                          startActivity(intent)//start new activity
+                          finish()
+                      } else {
+                          showError("Something went wrong")
+                      }
+                  }
+
+                  override fun onFailure(call: Call<User>, t: Throwable) {
+                      showError("Something went wrong")
+                  }
+              })*/
+
+
+        }
+
     }
 
-    private fun login(email: String, password: String) {
-        val credentials = "blockmedic:blockmedic@123"
-        val basic = "Basic " + Base64.encodeToString(
-            credentials.toByteArray(),
-            Base64.NO_WRAP
-        )
-        var request = LoginRequest(email, password)
-
-      /*  apiInterface!!.login(basic, request).enqueue(object : Callback<User> {
-            override fun onResponse(call: Call<User>, response: Response<User>) {
-                if (response.code() == 200) {
-                    val token: String? = response.body()?.token
-                    SharedPreferencesHandler().saveIntoSharedPreferences(applicationContext, token)
-                    val intent = Intent(this@LoginActivity, DashboardActivity::class.java)
-                    startActivity(intent)//start new activity
-                    finish()
-                } else {
-                    showError("Something went wrong")
-                }
-            }
-
-            override fun onFailure(call: Call<User>, t: Throwable) {
-                showError("Something went wrong")
-            }
-        })*/
-
-
-    }
