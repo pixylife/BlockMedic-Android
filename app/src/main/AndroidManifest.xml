@@ -10,6 +10,18 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.BlockMedic">
         <activity
+            android:name=".ui.doctor.NearByDoctorsActivity"
+            android:exported="false" />
+        <activity
+            android:name=".ui.healthreport.HealthValutActivity"
+            android:exported="false" />
+        <activity
+            android:name=".ui.patient.PatientViewListActivity"
+            android:exported="false" />
+        <activity
+            android:name=".ui.healthreport.HealthReportCreateActivity"
+            android:exported="false" />
+        <activity
             android:name=".ui.doctor.ViewDoctorsActivity"
             android:exported="false" />
         <activity
